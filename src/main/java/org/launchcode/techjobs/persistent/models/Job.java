@@ -1,5 +1,5 @@
 package org.launchcode.techjobs.persistent.models;
-//import org.launchcode.javawebdevtechjobspersistent.persistent.models.Skill;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Job extends AbstractEntity{
     private Employer employer;
 
     @ManyToMany
-    private List<org.launchcode.javawebdevtechjobspersistent.models.Skill> skills;
+    private List<Skill> skills;
 
     public Job() {
     }

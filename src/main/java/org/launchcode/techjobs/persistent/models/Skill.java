@@ -1,7 +1,4 @@
-// org.launchcode.javawebdevtechjobspersistent.models;
-package org.launchcode.javawebdevtechjobspersistent.models;
-import org.launchcode.techjobs.persistent.models.AbstractEntity;
-import org.launchcode.techjobs.persistent.models.Job;
+package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
