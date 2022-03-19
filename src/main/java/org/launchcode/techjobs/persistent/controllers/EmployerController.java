@@ -1,6 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
-
 import org.launchcode.techjobs.persistent.models.Employer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -13,6 +13,8 @@ import java.util.Optional;
 @RequestMapping("employers")
 public class EmployerController {
 
+    @Autowired
+    private org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository employerRepository;
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -27,8 +29,9 @@ public class EmployerController {
         if (errors.hasErrors()) {
             return "employers/add";
         }
-
+        employerRepository.save(newEmployer);
         return "redirect:";
+
     }
 
     @GetMapping("view/{employerId}")

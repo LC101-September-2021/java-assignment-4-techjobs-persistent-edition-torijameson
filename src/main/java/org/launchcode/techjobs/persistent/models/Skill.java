@@ -1,5 +1,30 @@
-package org.launchcode.techjobs.persistent.models;
+// org.launchcode.javawebdevtechjobspersistent.models;
+package org.launchcode.javawebdevtechjobspersistent.models;
+import org.launchcode.techjobs.persistent.models.AbstractEntity;
+import org.launchcode.techjobs.persistent.models.Job;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Entity
 public class Skill extends AbstractEntity {
+
+    @Size(max=512, message="PLce description of the skill desired here")
+    private String skillDescription;
+
+    @ManyToMany
+    private List<Job> jobs = new ArrayList<>();
+
+    public Skill(){}
+
+    public Skill(String description){
+        this.skillDescription=description;
+    }
+
+
 
 }

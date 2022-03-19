@@ -1,19 +1,30 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import org.launchcode.techjobs.persistent.models.Job;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
+import org.launchcode.techjobs.persistent.models.Employer;
+import java.util.Optional;
 
 /**
  * Created by LaunchCode
  */
 @Controller
 public class HomeController {
+
+    @Autowired
+    public EmployerRepository employerRepository;
+
+    @Autowired
+    public JobRepository jobRepository;
+
+    @Autowired
+    public SkillRepository skillRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -31,6 +42,7 @@ public class HomeController {
     }
 
     @PostMapping("add")
+    @RequestParam List<Integer> skills;
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
 
@@ -38,6 +50,11 @@ public class HomeController {
             model.addAttribute("title", "Add Job");
             return "add";
         }
+        List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        newJob.setSkills(skillObjs); // this is from the book. Do i need to add @CrudRepo?
+        //newJob.setEmployer();
+        // newJob.setSkills();
+        jobRepository.save(newJob);
 
         return "redirect:";
     }

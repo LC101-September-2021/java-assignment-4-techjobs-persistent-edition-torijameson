@@ -1,12 +1,22 @@
 package org.launchcode.techjobs.persistent.models;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 
+@MappedSuperclass
 public abstract class AbstractEntity {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO) //or is it .SEQUENCE? TODO
     private int id;
 
+    @NotBlank
+    @Size(max=128)
     private String name;
 
     public int getId() {
